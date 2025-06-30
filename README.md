@@ -20,7 +20,9 @@ I built this project in Visual Studio 2022, but I haven't quite figured out a wo
 
 This code randomly generates a set of points, finds their convex hull, and renders it to the screen.  Points within the convex hull are colored green (connected by a green line), while points outside of the convex hull are colored white.  The "red" points are the two points within the set that are the furthest away from each other.  Without an algorithm to find the convex hull, this would be an O(n^2) calculation, brute forcing all possible "furthest points".  Finding the convex hull with Graham Scan ends up being O(nlogn), limited by the sorting algorithm (I implemented it as an iterative merge sort, with a custom compare on the negative reciprocal slope as a proxy for polar angle).
 
-Notably, various arrays for all the points are stack allocated.  Could make them heap allocated with a restructuring of the code, but I decided that stack allocated did the job, as I'm able to run the algorithm on 30000 points locally.  Shaders included are pretty straightforward boilerplate for rendering.
+Notably, various arrays for all the points are stack allocated.  Could make them heap allocated with a restructuring of the code, but I decided that stack allocated did the job, as I'm able to run the algorithm on 30000 points locally.  
+
+Shaders included are pretty straightforward boilerplate for rendering.
 
 Using std::chrono, I profiled some hot spots as I was implementing the code, and made fixes accordingly (probably most notably, I changed from a selection sort to a merge sort for a massive boost).  The inefficient code is no longer present, but I left the profiling in.
 
